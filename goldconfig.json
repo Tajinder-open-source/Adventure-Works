@@ -1,0 +1,9 @@
+{
+	"key": "ADLSKey",
+	"scope": "DBScope",
+	"container": "pepsicoproject",
+	"storageAccountName": "pepsicoincubation",
+	"fileBasedDir": "fileIngestion",
+	"sourceDir": "silver",
+	"sinkDir": "gold"
+}	

@@ -1,0 +1,266 @@
+{
+	"key": "ADLSKey",
+	"scope": "DBScope",
+	"container": "pepsicoproject",
+	"storageAccountName": "pepsicoincubation",
+	"fileBasedDir": "fileIngestion",
+	"sourceDir": "bronze",
+	"sinkDir": "silver",
+	"profileDir": "ProfilingStatistics",
+	"tablenames": [
+		"Address",
+		"Customer",
+		"CustomerAddress",
+		"Product",
+		"ProductCategory",
+		"ProductDescription",
+		"ProductModel",
+		"ProductModelProductDescription",
+		"SalesOrderDetail",
+		"SalesOrderHeader"
+	],
+	"dropColumns":
+	[
+		{
+			"Address": 
+				[
+					"rowguid",
+					"ModifiedDate"
+				]
+		},
+		{
+			"Customer": [
+				"NameStyle",
+				"MiddleName",
+				"Suffix",
+				"PasswordHash",
+				"PasswordSalt",
+				"rowguid",
+				"ModifiedDate"
+			]
+		},
+		{
+			"CustomerAddress": [
+				"rowguid",
+				"ModifiedDate"
+			]
+		},
+		{
+			"Product": [
+				"DiscontinuedDate",
+				"ThumbNailPhoto",
+				"ThumbnailPhotoFileName",
+				"rowguid",
+				"ModifiedDate"
+			]
+		},
+		{
+			"ProductCategory": [
+				"rowguid",
+				"ModifiedDate"
+			]
+		},
+		{
+			"ProductDescription": [
+				"rowguid",
+				"ModifiedDate"
+			]
+		},
+		{
+			"ProductModel": [
+
+				"CatalogDescription",
+				"rowguid",
+				"ModifiedDate"
+			]
+		},
+		{
+			"ProductModelProductDescription": [
+				"rowguid",
+				"ModifiedDate"
+			]
+		},
+		{
+			"SalesOrderDetail": [
+				"rowguid",
+				"ModifiedDate"
+			]
+		},
+		{
+			"SalesOrderHeader": [
+				"RevisionNumber",
+				"Status",
+				"OnlineOrderFlag",
+				"CreditCardApprovalCode",
+				"Comment",
+				"rowguid",
+				"ModifiedDate"
+			]
+		}
+	],
+	"renameColumns": [{
+			"Address": [{
+					"AddressLine1": "PrimaryAddress",
+					"AddressLine2": "AlternateAddress",
+					"StateProvince": "State",
+					"CountryRegion": "Country"
+				}
+			]
+		},
+		{
+			"Customer": []
+		},
+		{
+			"CustomerAddress": []
+		},
+		{
+			"Product": []
+		},
+		{
+			"ProductCategory": []
+		},
+		{
+			"ProductDescription": []
+		},
+		{
+			"ProductModel": []
+		},
+		{
+			"ProductModelProductDescription": []
+		},
+		{
+			"SalesOrderDetail": []
+		},
+		{
+			"SalesOrderHeader": []
+		}
+	],
+	"typeCastColumns": [{
+			"Address": [
+			{
+				"AddressID" : "IntegerType()",
+				"PrimaryAddress" : "StringType()",
+				"AlternateAddress" : "StringType()",
+				"City" : "StringType()",
+				"State" : "StringType()",
+				"Country" : "StringType()",
+				"Postal": "StringType()"				
+			}
+			]
+		},
+		{
+			"Customer": [
+			{
+				"CustomerID" :"IntegerType()",
+				"Title": "StringType()",
+				"FirstName":"StringType()",
+				"LastName":"StringType()",
+				"CompanyName":"StringType()",
+				"SalesPerson":"StringType()",
+				"EmailAddress":"StringType()",
+				"Phone":"StringType()"
+			}
+			]
+		},
+		{
+			"CustomerAddress": [
+			{
+				"CustomerID":"IntegerType()",
+				"AddressID":"IntegerType()",
+				"AddressType":"StringType()"
+			}
+			]
+		},
+		{
+			"Product": [
+			{
+				"ProductID":"IntegerType()",
+				"Name":"StringType()",
+				"ProductNumber":"StringType()",
+				"Color":"StringType()",
+				"StandardCost":"DoubleType()",
+				"ListPrice":"DoubleType()",
+				"Size":"StringType()",
+				"Weight":"DoubleType()",
+				"ProductCategoryID":"IntegerType()",
+				"ProductModelID":"IntegerType()",
+				"SellStartDate" : "TimestampType()",
+				"SellEndDate" : "TimestampType()"
+			}
+			]
+		},
+		{
+			"ProductCategory": [
+			{
+				"ProductCategoryID":"IntegerType()",
+				"ParentProductCategoryID":"IntegerType()",
+				"Name":"StringType()"
+			}
+			]
+		},
+		{
+			"ProductDescription": [
+			{
+				"ProductDescriptionID":"IntegerType()",
+				"Description":"StringType()"
+			}
+			]
+		},
+		{
+			"ProductModel": [{
+				"ProductModelID": "IntegerType()",
+				"Name":"StringType()"
+			}]
+		},
+		{
+			"ProductModelProductDescription": [
+			{
+				"ProductModelID":"IntegerType()",
+				"ProductDescriptionID":"IntegerType()",
+				"Culture":"StringType()"
+			}
+			]
+		},
+		{	
+			"SalesOrderDetail": [{
+				"SalesOrderID": "IntegerType()",
+				"SalesOrderDetailID":"IntegerType()",
+				"OrderQty":"IntegerType()",
+				"ProductID":"IntegerType()",
+				"UnitPrice":"DoubleType()",
+				"UnitPriceDiscount":"DoubleType()",
+				"LineTotal":"DoubleType()"
+			}]
+		},
+		{
+			"SalesOrderHeader": [
+				{
+					"SalesOrderID":"IntegerType()",
+					"OrderDate": "TimestampType()",
+					"DueDate": "TimestampType()",
+					"ShipDate": "TimestampType()",
+					"SalesOrderNumber":"StringType()",
+					"PurchaseOrderNumber":"StringType()",
+					"AccountNumber":"StringType()",
+					"CustomerID":"IntegerType()",
+					"ShipToAddressID":"IntegerType()",
+					"BillToAddressID":"IntegerType()",
+					"ShipMethod":"StringType()",
+					"SubTotal":"DoubleType()",
+					"TaxAmt":"DoubleType()",
+					"Freight":"DoubleType()",
+					"TotalDue":"DoubleType()"
+				}
+			]
+		}
+	],
+	"replaceNullValue": [
+		{
+			"string": "NA",
+			"timestamp": "1900-01-01 00:00:00.0000000",
+			"boolean": "False",
+			"int": -1,
+			"double": -1.0
+		}
+	]
+}

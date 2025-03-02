@@ -1,0 +1,270 @@
+{
+    "dataRead": 718773,
+    "dataWritten": 1358360,
+    "filesWritten": 1,
+    "sourcePeakConnections": 1,
+    "sinkPeakConnections": 1,
+    "rowsRead": 295,
+    "rowsCopied": 295,
+    "copyDuration": 5,
+    "throughput": 140.385,
+    "errors": [],
+    "effectiveIntegrationRuntime": "AutoResolveIntegrationRuntime (East US)",
+    "usedDataIntegrationUnits": 4,
+    "billingReference": {
+        "activityType": "DataMovement",
+        "billableDuration": [
+            {
+                "meterType": "AzureIR",
+                "duration": 0.06666666666666667,
+                "unit": "DIUHours"
+            }
+        ]
+    },
+    "usedParallelCopies": 1,
+    "executionDetails": [
+        {
+            "source": {
+                "type": "AzureSqlDatabase",
+                "region": "East US"
+            },
+            "sink": {
+                "type": "AzureBlobFS",
+                "region": "East US"
+            },
+            "status": "Succeeded",
+            "start": "May 16, 2022, 1:52:48 pm",
+            "duration": 5,
+            "usedDataIntegrationUnits": 4,
+            "usedParallelCopies": 1,
+            "profile": {
+                "queue": {
+                    "status": "Completed",
+                    "duration": 3
+                },
+                "transfer": {
+                    "status": "Completed",
+                    "duration": 2,
+                    "details": {
+                        "readingFromSource": {
+                            "type": "AzureSqlDatabase",
+                            "workingDuration": 0,
+                            "timeToFirstByte": 0
+                        },
+                        "writingToSink": {
+                            "type": "AzureBlobFS",
+                            "workingDuration": 0
+                        }
+                    }
+                }
+            },
+            "detailedDurations": {
+                "queuingDuration": 3,
+                "timeToFirstByte": 0,
+                "transferDuration": 2
+            }
+        }
+    ],
+    "dataConsistencyVerification": {
+        "VerificationResult": "NotVerified"
+    },
+    "durationInQueue": {
+        "integrationRuntimeQueue": 0
+    }
+}
+
+Synapse ------------------------------------------------------
+
+{
+    "dataRead": 117271,
+    "dataWritten": 143066,
+    "filesRead": 1,
+    "sourcePeakConnections": 1,
+    "rowsRead": 542,
+    "rowsCopied": 542,
+    "copyDuration": 21,
+    "throughput": 5.453,
+    "sqlDwPolyBase": true,
+    "errors": [],
+    "effectiveIntegrationRuntime": "AutoResolveIntegrationRuntime (East US);AutoResolveIntegrationRuntime (East US)",
+    "usedDataIntegrationUnits": 4,
+    "billingReference": {
+        "activityType": "DataMovement",
+        "billableDuration": [
+            {
+                "meterType": "AzureIR",
+                "duration": 0.03333333333333333,
+                "unit": "DIUHours"
+            },
+            {
+                "meterType": "AzureIR",
+                "duration": 0.03333333333333333,
+                "unit": "DIUHours"
+            },
+            {
+                "meterType": "AzureIR",
+                "duration": 0.06666666666666667,
+                "unit": "DIUHours"
+            }
+        ]
+    },
+    "usedParallelCopies": 1,
+    "executionDetails": [
+        {
+            "source": {
+                "type": "AzureBlobFS",
+                "region": "East US"
+            },
+            "sink": {
+                "type": "AzureBlobFS",
+                "region": "East US"
+            },
+            "status": "Succeeded",
+            "start": "May 16, 2022, 4:25:42 pm",
+            "duration": 7,
+            "usedDataIntegrationUnits": 4,
+            "usedParallelCopies": 1,
+            "profile": {
+                "queue": {
+                    "status": "Completed",
+                    "duration": 4
+                },
+                "transfer": {
+                    "status": "Completed",
+                    "duration": 2,
+                    "details": {
+                        "listingSource": {
+                            "type": "AzureBlobFS",
+                            "workingDuration": 0
+                        },
+                        "readingFromSource": {
+                            "type": "AzureBlobFS",
+                            "workingDuration": 0
+                        },
+                        "writingToSink": {
+                            "type": "AzureBlobFS",
+                            "workingDuration": 0
+                        }
+                    }
+                }
+            },
+            "detailedDurations": {
+                "queuingDuration": 4,
+                "transferDuration": 2
+            }
+        },
+        {
+            "source": {
+                "type": "AzureBlobFS",
+                "region": "East US"
+            },
+            "sink": {
+                "type": "AzureSqlDW",
+                "region": "East US"
+            },
+            "status": "Succeeded",
+            "start": "May 16, 2022, 4:25:50 pm",
+            "duration": 13,
+            "usedDataIntegrationUnits": 2,
+            "usedParallelCopies": 1,
+            "profile": {
+                "queue": {
+                    "status": "Completed",
+                    "duration": 6
+                },
+                "transfer": {
+                    "status": "Completed",
+                    "duration": 6
+                }
+            },
+            "detailedDurations": {
+                "queuingDuration": 6,
+                "transferDuration": 6
+            }
+        }
+    ],
+    "dataConsistencyVerification": {
+        "VerificationResult": "Unsupported"
+    },
+    "durationInQueue": {
+        "integrationRuntimeQueue": 0
+    }
+}
+
+
+------------------------------------------------------------------
+
+CREATE SCHEMA [Audit]
+CREATE TABLE [Audit].[metastore]
+(
+[AuditID][int] IDENTITY(1,1) PRIMARY KEY,
+[PipelineName] [varchar](50),
+[PipelineTriggerID][varchar](40),
+[PipelineTriggerName][varchar](50),
+[PipelineTriggerTime][varchar](50),
+[DataFactoryName][varchar](50),
+[TableSchema][varchar](20),
+[TableName][varchar](50),
+[PrimaryKey][varchar](50),
+[AquisitionStrategy][varchar](30),
+[RowsRead][int],
+[RowsCopied][int],
+[CopyDurationSec][int],
+[Source][varchar](30),
+[Destination][varchar](30),
+[MergeStrategy][varchar](20)
+)
+
+DROP TABLE [Audit].[metastore];
+
+
+
+CREATE PROCEDURE [dbo].[auditing] 
+@PipelineName varchar(50),
+@PipelineTriggerID varchar(40),
+@PipelineTriggerName varchar(50),
+@PipelineTriggerTime varchar(50),
+@DataFactoryName varchar(50),
+@TableSchema varchar(20),
+@TableName varchar(50),
+@PrimaryKey varchar(50),
+@AquisitionStrategy varchar(30),
+@RowsRead int,
+@RowsCopied int,
+@CopyDurationSec int,
+@Source varchar(30),
+@Destination varchar(30),
+@MergeStrategy varchar(20)
+AS
+BEGIN
+INSERT INTO [Audit].[metastore]
+(PipelineName,PipelineTriggerID,PipelineTriggerName,PipelineTriggerTime,DataFactoryName,TableSchema,TableName,
+PrimaryKey,AquisitionStrategy,RowsRead,RowsCopied,CopyDurationSec,Source,Destination,MergeStrategy)
+VALUES
+(@PipelineName,@PipelineTriggerID,@PipelineTriggerName,@PipelineTriggerTime,@DataFactoryName,@TableSchema,@TableName,
+@PrimaryKey,@AquisitionStrategy,@RowsRead,@RowsCopied,@CopyDurationSec,@Source,@Destination,@MergeStrategy)
+END
+
+
+
+SELECT *FROM [Audit].[metastore];
+
+DELETE FROM [Audit].[metastore];
+
+EXEC sp_help 'Audit.metastore';
+
+  EXEC sp_pkeys 
+  @table_name = Address,
+  @table_owner = SalesLT,
+  @table_qualifier = AdventureWorks;
+
+
+
+select C.COLUMN_NAME FROM  
+INFORMATION_SCHEMA.TABLE_CONSTRAINTS T  
+JOIN INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE C  
+ON C.CONSTRAINT_NAME=T.CONSTRAINT_NAME  
+WHERE  
+C.TABLE_SCHEMA = '@{item().Table_Schema}'
+and C.TABLE_NAME= '@{item().Table_Name}'
+and T.CONSTRAINT_TYPE='PRIMARY KEY'
